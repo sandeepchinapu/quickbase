@@ -1,0 +1,32 @@
+<div class="field">
+    When does the employee's paystub need to be provided? (Web) :
+    <%= data["general_delivery_req_note"] %>
+</div>
+
+<div class="field">
+    When does the employee's paystub need to be provided? (Web) :
+    <%= data["electronic_delivery_req_note"] %>
+</div>
+
+<div class="field">
+    What are the requirements for providing a written or a hardcopy pay stub to the employee? (Web) :
+    <%= data["paper_deliver_req_note"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= data["pay_stub_effective_date"] %>
+</div>
+
+<h4> History of pay stub requirement </h4>
+<% data["record_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "pay_stub_requirement_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<div class="field">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>

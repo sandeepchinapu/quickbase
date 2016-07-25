@@ -1,0 +1,58 @@
+--------------------------------------------
+<% history_data = history_data["DataChangeAudit"] %>
+<div class="field">
+    Surcharge Name :
+    <%= history_data["SurchargeName"] %>
+</div>
+
+<div class="field">
+    Surcharge Abbreviation :
+    <%= history_data["SurchargeCode"] %>
+</div>
+
+<div class="field">
+    Creditable to FUTA :
+    <%= history_data["CreditableFutaYNCode"] %>
+</div>
+
+<div class="field">
+    Fixed Rate :
+    <%= history_data["FixedEmployerRate"] %>
+</div>
+
+<div class="field">
+    Minimum Rate :
+    <%= history_data["MinEmployerRate"] %>
+</div>
+
+<div class="field">
+    Maximum Rate :
+    <%= history_data["MaxEmployerRate"] %>
+</div>
+
+<div class="field">
+    Wage Base Amount :
+    <%= history_data["EmployerWageBaseAmt"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= history_data["DataEffectiveDate"] %>
+</div>
+
+<h5>Service Requirements</h5>
+<div class="field">
+    Supported QuickBooks Surcharge :
+    <%= history_data["QBSurchargeYNCode"] %>
+</div>
+
+<div class="field">
+    QuickBooks DIY Requirements :
+    <%= history_data["QBDIYReqNote"] %>
+</div>
+
+<div class="field">
+    Assisted Requirements :
+    <%= history_data["QBAssistedReqNote"] %>
+</div>
+

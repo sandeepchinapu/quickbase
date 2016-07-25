@@ -1,0 +1,37 @@
+<div class="field">
+    Employer Filing Requirements :
+    <%= data["employer_filing_req_note"] %>
+</div>
+
+<div class="field">
+    Employer Payment Requirements :
+    <%= data["employer_payment_req_note"] %>
+</div>
+
+<div class="field">
+    Service Provider Filing Requirements :
+    <%= data["svc_provider_filing_req_note"] %>
+</div>
+
+<div class="field">
+    Service Provider Payment Requirements :
+    <%= data["svc_provider_payment_req_note"] %>
+</div>
+
+<div class="field">
+    Effective Date" :
+    <%= data["mandate_effective_date"] %>
+</div>
+
+<h4> History of Electronic Mandate Requirements </h4>
+<% data["record_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "electrionic_mandate_requirements_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<div class="field">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>

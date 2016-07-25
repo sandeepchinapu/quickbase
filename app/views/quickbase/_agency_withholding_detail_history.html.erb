@@ -1,0 +1,31 @@
+---------------
+<% history_data = history_data["DataChangeAudit"] %>
+<div class="field">
+    WH Supported? :
+    <%= history_data["CalculateTaxYNCode"] %>
+</div>
+
+<div class="field">
+    Allowance Amount Detail :
+    <%= history_data["AllowanceAmountsNote"] %>
+</div>
+
+<div class="field">
+    Supplemental Rate Detail :
+    <%= history_data["SupplementalRatesNote"] %>
+</div>
+
+<div class="field">
+    Based on Federal Detail :
+    <%= history_data["FedWHDependencyNote"] %>
+</div>
+
+<div class="field">
+    Calculation Rounded to the Nearest Dollar :
+    <%= history_data["RoundNearestDollarYNCode"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= history_data["DataEffectiveDate"] %>
+</div>

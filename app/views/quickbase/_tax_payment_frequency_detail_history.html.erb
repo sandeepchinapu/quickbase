@@ -1,0 +1,48 @@
+<% history_data = history_data["DataChangeAudit"] %>
+<div class="field">
+    Payment Frequency:
+    <%= history_data["TaxPaymentFreqCode"] %>
+    
+</div>
+<div id="whatever" class="view_tax_payment">
+
+<div class="field">
+    Payment Name :
+    <%= history_data["TaxPaymentName"] %>
+</div>
+
+<div class="field">
+    Frequency Determination Method :
+    <%= history_data["FreqDeterminationCode"] %>
+</div>
+
+<div class="field">
+    Frequency Determination Lookback :
+    <%= history_data["FreqDetLookbackReqNote"] %>
+</div>
+
+<div class="field">
+    Liability Accrual Period :
+    <%= history_data["LiabilityGroupingReqNote"] %>
+</div>
+
+<div class="field">
+    Due Date :
+    <%= history_data["TaxPaymentDueDateNote"] %>
+</div>
+
+<div class="field">
+    Holiday Allowance :
+    <%= history_data["HolidayReqNote"] %>
+</div>
+
+<div class="field">
+    Threshold Requirement :
+    <%= history_data["ThresholdReqNote"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= history_data["DataEffectiveDate"] %>
+</div>
+</div>

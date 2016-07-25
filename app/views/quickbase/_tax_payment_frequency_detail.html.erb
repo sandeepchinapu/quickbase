@@ -1,0 +1,61 @@
+
+<div class="field">
+    Payment Frequency:
+    <%= data["tax_payment_frequency_code"] %>
+    <a href="#" id="show_whatever">Show</a>
+</div>
+<div id="whatever" class="view_tax_payment">
+
+<div class="field">
+    Payment Name :
+    <%= data["agency_tax_payment_name"] %>
+</div>
+
+<div class="field">
+    Frequency Determination Method :
+    <%= data["frequency_determination_code"] %>
+</div>
+
+<div class="field">
+    Frequency Determination Lookback :
+    <%= data["freq_det_lookback_req_note"] %>
+</div>
+
+<div class="field">
+    Liability Accrual Period :
+    <%= data["liability_grouping_req_note"] %>
+</div>
+
+<div class="field">
+    Due Date :
+    <%= data["tax_payment_due_date_note"] %>
+</div>
+
+<div class="field">
+    Holiday Allowance :
+    <%= data["holiday_requirement_note"] %>
+</div>
+
+<div class="field">
+    Threshold Requirement :
+    <%= data["threshold_requirement_note"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= data["pay_frequency_effective_date"] %>
+</div>
+
+<h5> History of tax payment frequency details</h5>
+<% data["record_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "tax_payment_frequency_detail_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<div class="field">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>
+</div>

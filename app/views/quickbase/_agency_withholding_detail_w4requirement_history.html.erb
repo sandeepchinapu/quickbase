@@ -1,0 +1,21 @@
+------
+<% history_data = history_data["DataChangeAudit"] %>
+<div class="field">
+    Filing Status Detail :
+    <%= history_data["W4FilingStatusesNote"] %>
+</div>
+
+<div class="field">
+    Deducation/Allowance Detail :
+    <%= history_data["W4DeductibleItemsNote"] %>
+</div>
+
+<div class="field">
+    Can Use Federal W4? :
+    <%= history_data["FedW4AllowedYNCode"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= history_data["DataEffectiveDate"] %>
+</div>

@@ -1,0 +1,68 @@
+<div class="field">
+    Surcharge Name :
+    <%= data["surcharge_name"] %>
+</div>
+
+<div class="field">
+    Surcharge Abbreviation :
+    <%= data["surcharge_code"] %>
+</div>
+
+<div class="field">
+    Creditable to FUTA :
+    <%= data["credifield_name_to_futa_yn_code"] %>
+</div>
+
+<div class="field">
+    Fixed Rate :
+    <%= data["fixed_employer_rate"] %>
+</div>
+
+<div class="field">
+    Minimum Rate :
+    <%= data["minimum_employer_rate"] %>
+</div>
+
+<div class="field">
+    Maximum Rate :
+    <%= data["maximum_employer_rate"] %>
+</div>
+
+<div class="field">
+    Wage Base Amount :
+    <%= data["employer_wage_base_amount"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= data["surcharge_effective_date"] %>
+</div>
+
+<h4> History of Agency surcharge detail</h4>
+<% data["record_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "agency_surcharge_detail_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<h5>Service Requirements</h5>
+<div class="field">
+    Supported QuickBooks Surcharge :
+    <%= data["quickbooks_surcharge_yn_code"] %>
+</div>
+
+<div class="field">
+    QuickBooks DIY Requirements :
+    <%= data["qb_diy_requirements_note"] %>
+</div>
+
+<div class="field">
+    Assisted Requirements :
+    <%= data["qb_assisted_requirements_note"] %>
+</div>
+
+<div class="field">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>

@@ -1,0 +1,62 @@
+<div class="field">
+    Tax Form ID :
+    <%= data["agency_tax_form_id"] %>
+</div>
+
+<div class="field">
+    Filing Enrollment Instructions :
+    <%= data["filing_enrollment_note"] %>
+</div>
+
+<div class="field">
+    Payment Enrollment Instructions :
+    <%= data["payment_enrollment_note"] %>
+</div>
+
+<div class="field">
+    Login Requirements :
+    <%= data["login_requirement_note"] %>
+</div>
+
+<div class="field">
+    Additional Login Requirements :
+    <%= data["additional_login_detail_note"] %>
+</div>
+
+<div class="field">
+    Change Bank Account Instruction :
+    <%= data["bank_acct_change_note"] %>
+</div>
+
+<div class="field">
+    Penalty & Interest Requirements :
+    <%= data["penalty_interest_req_note"] %>
+</div>
+
+<div class="field">
+    Paying Penalty & Interest :
+    <%= data["penalty_interest_howto_note"] %>
+</div>
+
+<div class="field">
+    Alternative Submission Process :
+    <%= data["alternative_submission_note"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= data["e_form_req_effective_date"] %>
+</div>
+
+<h3> History of e-form requirement </h3>
+<% data["record_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "electronic_form_requirement_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<div class="field">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>

@@ -1,0 +1,106 @@
+
+<div class="field">
+    Agency Name :
+    <%= data["agency_code"] %>
+</div>
+
+<div class="field">
+    Vendor Payable Name :
+    <%= data["vendor_payable_name"] %>
+</div>
+
+<div class="field">
+    Tax Item Code :
+    <%= data["tax_item_code"] %>
+</div>
+
+<div class="field">
+    Mailing Address :
+    <%= data["office_full_mailing_address"] %>
+</div>
+
+<div class="field">
+    Phone Numbers :
+    <%= data["office_phone_number_detail"] %>
+</div>
+
+<div class="field">
+    Support URL :
+    <%= data["customer_support_url"] %>
+</div>
+
+<div class="field">
+    Agency Website :
+    <%= data["agency_tax_item_website_url"] %>
+</div>
+
+<div class="field">
+    Employer Guide URL :
+    <%= data["employer_guide_url"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= data["agency_detail_effective_date"] %>
+</div>
+
+<h4> History of Agency contact information </h4>
+<% data["detail_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "agency_contact_information_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<div class="field">
+    Agency Holidays :
+    <%= data["legal_holidays_observed_note"] %>
+</div>
+
+<h3> History of Hoidays </h3>
+<% data["holiday_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "agency_contact_information_holiday_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<div class="field">
+    Holiday Effective Date :
+    <%= data["holiday_effective_date"] %>
+</div>
+
+<h3> Agency Account Number Formats</h3>
+<div class="field">
+    Account Number Name :
+    <%= data["account_number_name"] %>
+</div>
+
+<div class="field">
+    QuickBooks Employer Account Number Format(s) :
+    <%= data["quickbooks_er_acct_num_format"] %>
+</div>
+
+<div class="field">
+    Account Number Effective Date :
+    <%= data["account_number_effective_date"] %>
+</div>
+
+<h3> History Agency Account Number Formats</h3>
+<% data["acct_num_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "agency_contact_information_accnumber_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<div class="field">
+    Reporting Code Requirements :
+    <%= data["reporting_codes_req_note"] %>
+</div>
+
+<div class="field">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>
+

@@ -1,0 +1,234 @@
+<h2>Tax Forms</h2>
+<h3>Agency Form Detail</h3>
+<% @data = @final_json[@state]["agency_form_detail"] %>
+<% @data.each do |data| %>
+<%= render partial: "agency_form_detail", locals: { data: data } %>
+
+<% end %>
+
+<!-- #######################################
+############################################ -->
+<h2>Withholdings</h2>
+
+<h3>Agency contact information</h3>
+<% @data = @final_json[@state]["agency_tax_item_detail"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH/UI" %>
+<%= render partial: "agency_contact_information", locals: { data: data } %>
+<% end %>
+<% end %>
+
+<h3>Agency Withholding Details</h3>
+<% @data = @final_json[@state]["agency_withholding_tax_details"] %>
+<% @data.each do |data| %>
+<%= render partial: "agency_withholding_detail", locals: { data: data } %>
+
+<% end %>
+
+<h3>Agency Tax Payment Details</h3>
+<% @data = @final_json[@state]["agency_tax_payment_detail"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH/SDI" %>
+<%= render partial: "agency_tax_payment_detail", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+<h3>Tax Payment Frequency Detail</h3>
+<% @data = @final_json[@state]["tax_payment_frequency"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH/SDI" %>
+<%= render partial: "tax_payment_frequency_detail", locals: { data: data } %>
+<% end %>
+<% end %>
+
+<h3>Electronic Mandate Requirement</h3>
+<% @data = @final_json[@state]["electroinc_mandate_requirement"] %>
+<% @data.each do |data| %>
+<%= render partial: "electronic_mandate_requirement", locals: { data: data } %>
+
+<% end %>
+
+<h3>Early Tax Payment Detail</h3>
+<% @data = @final_json[@state]["early_tax_payment_detail"] %>
+<% @data.each do |data| %>
+<%= render partial: "early_tax_payment", locals: { data: data } %>
+
+<% end %>
+
+<!-- #######################################
+############################################ -->
+<h2>Unemployment Tax</h2>
+
+<h3>Agency contact information</h3>
+<% @data = @final_json[@state]["agency_tax_item_detail"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH/UI" %>
+<%= render partial: "agency_contact_information", locals: { data: data } %>
+<% end %>
+<% end %>
+
+<h3>Agency Tax Rate Detail</h3>
+<% @data = @final_json[@state]["agency_tax_rate"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "UI" %>
+<%= render partial: "agency_tax_rate", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+<h3>Agency Surcharge Detail</h3>
+<% @data = @final_json[@state]["agency_surcharge"] %>
+<% @data.each do |data| %>
+<%= render partial: "agency_surcharge_detail", locals: { data: data } %>
+
+<% end %>
+
+<h3>Agency Tax Payment Details</h3>
+<% @data = @final_json[@state]["agency_tax_payment_detail"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "UI" %>
+<%= render partial: "agency_tax_payment_detail", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+<h3>Tax Payment Frequency Detail</h3>
+<% @data = @final_json[@state]["tax_payment_frequency"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "UI" %>
+<%= render partial: "tax_payment_frequency_detail", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+<h3>Electronic Mandate Requirements</h3>
+<% @data = @final_json[@state]["electroinc_mandate_requirement"] %>
+<% @data.each do |data| %>
+<%= render partial: "electronic_mandate_requirement", locals: { data: data } %>
+
+<% end %>s
+
+<h3>Early Tax Payment Detail</h3>
+<% @data = @final_json[@state]["early_tax_payment_detail"] %>
+<% @data.each do |data| %>
+<%= render partial: "early_tax_payment", locals: { data: data } %>
+
+<% end %>
+
+
+<!-- #######################################
+############################################ -->
+
+<h2>Other Taxes</h2>
+
+<h3>Agency contact information</h3>
+<% @data = @final_json[@state]["agency_tax_item_detail"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "SDI" %>
+<%= render partial: "agency_contact_information", locals: { data: data } %>
+
+<% end %>
+<% end %>
+<h3>Agency Tax Rate Detail</h3>
+<% @data = @final_json[@state]["agency_tax_rate"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "SDI" %>
+<%= render partial: "agency_tax_rate", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+<h3>Tax Payment Frequency Detail</h3>
+<% @data = @final_json[@state]["tax_payment_frequency"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH/SDI" %>
+<%= render partial: "tax_payment_frequency_detail", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+<h3>Agency Tax Payment Details</h3>
+<% @data = @final_json[@state]["agency_tax_payment_detail"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH/SDI" %>
+<%= render partial: "agency_tax_payment_detail", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+<!-- #######################################
+############################################ -->
+
+<h3>Local Tax</h3>
+
+<h3> Agency Local Tax Rate Detail</h3>
+<% @data = @final_json[@state]["agency_local_tax_rate_detail"] %>
+<% @data.each do |data| %>
+<%= render partial: "agency_local_tax_rate_detail", locals: { data: data } %>
+
+<% end %>
+
+<!-- #######################################
+############################################ -->
+
+<h2>E-file Pay</h2>
+
+<h3>Electronic Form Requirement Detail</h3>
+<% @data = @final_json[@state]["electronic_form_requirement"] %>
+<% @data.each do |data| %>
+<%= render partial: "electronic_form_requirement", locals: { data: data } %>
+
+<% end %>
+
+<!-- #######################################
+############################################ -->
+
+<h2>General State Agency</h2>
+
+<h3>Pay Stub Requirement</h3>
+<% @data = @final_json[@state]["pay_stub_requirement"] %>
+<% @data.each do |data| %>
+<%= render partial: "pay_stub_requirement", locals: { data: data } %>
+
+<% end %>
+
+<!-- #######################################
+############################################ -->
+
+<h2>Employer Registration</h2>
+
+<h3>Withholding Tax</h3>
+<% @data = @final_json[@state]["employer_registration"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH" %>
+<%= render partial: "employer_registration", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+<h3>Unemployment Insurance Tax</h3>
+<% @data = @final_json[@state]["employer_registration"] %>
+<% @data.each do |data| %>
+<% if data["tax_item_code"] == "UI" %>
+<%= render partial: "employer_registration", locals: { data: data } %>
+
+<% end %>
+<% end %>
+
+
+
+<script>
+$(function() {
+  $('a#show_whatever').click(function(event){
+    event.preventDefault();
+    $('div#whatever').toggle();
+  });
+});
+</script>
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+<div class="field">
+    QuickBooks DIY Recommendation :
+    <%= data["qb_diy_requirements_note"] %>
+</div>
+
+<div class="field">
+    "Are Payments allowed more often within a standard frequency?" :
+    <%= data["eft_eligibility_note"] %>
+</div>
+
+<div class="field">
+    What happens if early payments are sent? :
+    <%= data["eft_process_note"] %>
+</div>
+
+<div class="field">
+    Are any communications sent to the employer if they send early? :
+    <%= data["eft_communication_note"] %>
+</div>
+
+<div class="field">
+    Should a form be sent or used if making early payments? :
+    <%= data["eft_form_note"] %>
+</div>
+
+<div class="field">
+    Any timing considerations? :
+    <%= data["eft_timing_note"] %>
+</div>
+
+<div class="field">
+    What system impacts can be expected at the agency? :
+    <%= data["eft_known_sys_impacts_note"] %>
+</div>
+
+<div class="field">
+    "Are Payments allowed more often within a standard frequency?" :
+    <%= data["check_eligibility_note"] %>
+</div>
+
+<div class="field">
+    What happens if early payments are sent? :
+    <%= data["check_process_note"] %>
+</div>
+
+<div class="field">
+    Are any communications sent to the employer if they send early? :
+    <%= data["check_communication_note"] %>
+</div>
+
+<div class="field">
+    Should a form be sent or used if making early payments? :
+    <%= data["check_form_note"] %>
+</div>
+
+<div class="field">
+    Any timing considerations? :
+    <%= data["check_timing_note"] %>
+</div>
+
+<div class="field">
+    What system impacts can be expected at the agency? :
+    <%= data["check_known_sys_impacts_note"] %>
+</div>
+
+<div class="field">
+    Effective Date :
+    <%= data["early_pay_effective_date"] %>
+</div>
+
+<h5> History of early tax payment detail </h5>
+<% data["record_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "early_tax_payment_detail_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<div class="field">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>

@@ -1,0 +1,92 @@
+
+
+<div class="field">
+    Fixed Rate :
+    <%= data["fixed_employer_rate"] %>
+</div>
+
+<div class="field">
+    Fixed Dollar Amount :
+    <%= data["fixed_employer_amount"] %>
+</div>
+
+<div class="field">
+    Minimum Rate :
+    <%= data["minimum_employer_rate"] %>
+</div>
+
+<div class="field">
+    Maximum Rate :
+    <%= data["maximum_employer_rate"] %>
+</div>
+
+<div class="field">
+    New Rate :
+    <%= data["new_employer_rate"] %>
+</div>
+
+<div class="field">
+    Rate Effective Date :
+    <%= data["er_rate_effective_date"] %>
+</div>
+
+<h4> History of Agency tax rate </h4>
+<% data["er_rate_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "agency_tax_rate_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<h5>Employer Wage Base</h5>
+<div class="field">
+    Wage Base Amount :
+    <%= data["employer_wage_base_amount"] %>
+</div>
+
+<div class="field">
+    Wage Base Effective Date :
+    <%= data["er_wage_base_effective_date"] %>
+</div>
+
+<h4> History of Wage Base </h4>
+<% data["er_wb_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "agency_tax_rate_er_wb_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<h5>Employee Rates</h5>
+<div class="field">
+    Fixed Rate :
+    <%= data["fixed_employee_rate"] %>
+</div>
+
+<div class="field">
+    Fixed Dollar Amount :
+    <%= data["fixed_employee_amount"] %>
+</div>
+
+<h5>Employee Wage Base</h5>
+<div class="field">
+    Wage Base Amount :
+    <%= data["employee_wage_base_amount"] %>
+</div>
+
+<h5>Service Requirements</h5>
+<div class="field">
+    QuickBooks DIY Requirements :
+    <%= data["qb_diy_requirements_note"] %>
+</div>
+
+<div class="field">
+    Assisted Requirements :
+    <%= data["qb_assisted_requirements_note"] %>
+</div>
+
+<h5>Verification Tracking</h5>
+<div class="field">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>
