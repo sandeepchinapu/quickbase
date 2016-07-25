@@ -86,7 +86,7 @@
     <%= data["account_number_effective_date"] %>
 </div>
 
-<h3> History Agency Account Number Formats</h3>
+<h3> History of Agency Account Number Formats</h3>
 <% data["acct_num_effective_date_audit"].each do |history_data| %>
 <div>
 <%= render partial: "agency_contact_information_accnumber_history", locals: { history_data: history_data } %>
