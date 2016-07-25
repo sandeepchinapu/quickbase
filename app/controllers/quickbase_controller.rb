@@ -491,7 +491,6 @@ require 'will_paginate/array'
 
   def ImportAgencyTaxRateEmployeeRateHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
