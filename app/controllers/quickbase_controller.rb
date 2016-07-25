@@ -720,7 +720,7 @@ require 'will_paginate/array'
     agency_local_tax_rate_detail_json = []
     db_id = 'bgi8bfvzi'
     quickbase = Quickbase::Connection.new(:apptoken => app_token, :dbid => db_id)
-    @column = "6.7.8.9.10.11.13.14.15.26.27.28.12.16.21"
+    @column = "6.7.8.9.10.11.15.13.14.26.27.28.12.16.21"
     @agency_local_tax_rate_detail = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @agency_local_tax_rate_detail.each do |data|
       data_json = {
