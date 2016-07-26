@@ -6,6 +6,16 @@
 </div>
 
 <div class="field">
+    Description :
+    <%= history_data["Description"] %>
+</div>
+
+<div class="field">
+    Subform of :
+    <%= history_data["AssociatedTaxFormID"] %>
+</div>
+
+<div class="field">
     Filing Frequency :
     <%= history_data["FilingFrequencyNote"] %>
 </div>
@@ -33,6 +43,11 @@
 <div class="field">
     File Zero Liability Rules :
     <%= history_data["FilingZeroLiabilityYNCode"] %>
+</div>
+
+<div class="field">
+    AnnualReconciliation :
+    <%= history_data["AnnualReconYNCode"] %>
 </div>
 
 <div class="field">
