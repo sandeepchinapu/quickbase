@@ -1,3 +1,7 @@
+<div class="field">
+    Form ID :
+    <%= data["tax_item_code"] %>
+</div>
 
 <div class="field">
     Local Tax name :
@@ -29,6 +33,16 @@
     <%= data["tax_rate_effective_date"] %>
 </div>
 
+<div class="field">
+    Allowance Amounts Detail :
+    <%= data["allowance_amounts_note"] %>
+</div>
+
+<div class="field">
+    Tax Calculation Detail :
+    <%= data["tax_calculation_note"] %>
+</div>
+
 <h4> History of Local tax rate detail</h4>
 <% data["record_effective_date_audit"].each do |history_data| %>
 <div>
@@ -46,6 +60,11 @@
 <div class="field">
     Assisted Requirements :
     <%= data["qb_assisted_requirements_note"] %>
+</div>
+
+<div class="field">
+    IOP Requirements :
+    <%= data["iop_requirements_note"] %>
 </div>
 
 <h4> Verification Tracking </h4>

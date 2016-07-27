@@ -1,5 +1,4 @@
-
-------------------
+-----------------
 <% history_data = history_data["DataChangeAudit"] %>
 <div class="field">
     Local Tax name :
@@ -22,6 +21,16 @@
 </div>
 
 <div class="field">
+    Tax Cacluation Detail :
+    <%= history_data["TaxCalculationNote"] %>
+</div>
+
+<div class="field">
+    Allowance Amounts Detail :
+    <%= history_data["AllowanceAmtNote"] %>
+</div>
+
+<div class="field">
     Additional Requirements :
     <%= history_data["AdditionalReqNote"] %>
 </div>
@@ -29,4 +38,19 @@
 <div class="field">
     Rate Effective Date :
     <%= history_data["DataEffectiveDate"] %>
+</div>
+
+<div class="field">
+    QuickBooks DIY Requirements :
+    <%= history_data["QBDIYReqNote"] %>
+</div>
+
+<div class="field">
+    Assisted Requirements :
+    <%= history_data["QBAssistedReqNote"] %>
+</div>
+
+<div class="field">
+    IOP Requirements :
+    <%= history_data["IOPReqNote"] %>
 </div>
