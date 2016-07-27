@@ -1,3 +1,4 @@
+----------
 <% history_data = history_data["DataChangeAudit"] %>
 <div class="field">
     Fixed Rate :
@@ -17,6 +18,16 @@
 <div class="field">
     Maximum Rate :
     <%= history_data["MaxEmployerRate"] %>
+</div>
+
+<div class="field">
+    New Construction Rate Details :
+    <%= history_data["NewConstructionERRateNote"] %>
+</div>
+
+<div class="field">
+    Limit Calculation Frequency :
+    <%= history_data["ERLimitFreqCalcCD"] %>
 </div>
 
 <div class="field">

@@ -1,5 +1,4 @@
 
-
 <div class="field">
     Fixed Rate :
     <%= data["fixed_employer_rate"] %>
@@ -26,6 +25,16 @@
 </div>
 
 <div class="field">
+    New Construction Rate Details :
+    <%= data["new_construction_er_rate_note"] %>
+</div>
+
+<div class="field">
+    Limit Calculation Frequency :
+    <%= data["er_limit_freq_calculation_cd"] %>
+</div>
+
+<div class="field">
     Rate Effective Date :
     <%= data["er_rate_effective_date"] %>
 </div>
@@ -49,7 +58,7 @@
     <%= data["er_wage_base_effective_date"] %>
 </div>
 
-<h4> History of Wage Base </h4>
+<h4> History of Employer Wage Base </h4>
 <% data["er_wb_effective_date_audit"].each do |history_data| %>
 <div>
 <%= render partial: "agency_tax_rate_er_wb_history", locals: { history_data: history_data } %>
@@ -68,11 +77,42 @@
     <%= data["fixed_employee_amount"] %>
 </div>
 
+<div class="field">
+    Limit Calculation Frequency :
+    <%= data["ee_limit_freq_calculation_cd"] %>
+</div>
+
+<div class="field">
+    Rate Effective Date :
+    <%= data["ee_rate_effective_date"] %>
+</div>
+
+<h4> History of employee rates </h4>
+<% data["ee_rate_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "agency_tax_rate_ee_rates_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
 <h5>Employee Wage Base</h5>
 <div class="field">
     Wage Base Amount :
     <%= data["employee_wage_base_amount"] %>
 </div>
+
+<div class="field">
+    Wage Base Effective Date :
+    <%= data["ee_wage_base_effective_date"] %>
+</div>
+
+<h4> History of employee Wage Base </h4>
+<% data["ee_wb_effective_date_audit"].each do |history_data| %>
+<div>
+<%= render partial: "agency_tax_rate_ee_wb_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
 
 <h5>Service Requirements</h5>
 <div class="field">
@@ -83,6 +123,11 @@
 <div class="field">
     Assisted Requirements :
     <%= data["qb_assisted_requirements_note"] %>
+</div>
+
+<div class="field">
+    IOP Requirements :
+    <%= data["iop_requirements_note"] %>
 </div>
 
 <h5>Verification Tracking</h5>

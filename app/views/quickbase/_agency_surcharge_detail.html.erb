@@ -10,7 +10,7 @@
 
 <div class="field">
     Creditable to FUTA :
-    <%= data["credifield_name_to_futa_yn_code"] %>
+    <%= data["creditable_to_futa_yn_code"] %>
 </div>
 
 <div class="field">
@@ -38,6 +38,11 @@
     <%= data["surcharge_effective_date"] %>
 </div>
 
+<div class="field">
+    Surcharge Expiration Date :
+    <%= data["surcharge_expiration_date"] %>
+</div>
+
 <h4> History of Agency surcharge detail</h4>
 <% data["record_effective_date_audit"].each do |history_data| %>
 <div>
@@ -46,7 +51,7 @@
 </div>
 <% end %>
 
-<h5>Service Requirements</h5>
+<h4>Service Requirements</h4>
 <div class="field">
     Supported QuickBooks Surcharge :
     <%= data["quickbooks_surcharge_yn_code"] %>
@@ -62,6 +67,7 @@
     <%= data["qb_assisted_requirements_note"] %>
 </div>
 
+<h4>Verification Tracking</h4>
 <div class="field">
     Last Verified Date :
     <%= data["last_verified_date"] %>
