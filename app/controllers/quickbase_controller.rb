@@ -142,7 +142,7 @@ require 'will_paginate/array'
           "AssociatedTaxFormID" => @doc.xpath("//AssociatedTaxFormID").text,
           "Description" => @doc.xpath("//Description").text,
           "FilingFrequencyNote" => @doc.xpath("//FilingFrequencyNote").text,
-          "FilingDueDateReqNot" => @doc.xpath("//FilingDueDateReqNot").text,
+          "FilingDueDateReqNote" => @doc.xpath("//FilingDueDateReqNote").text,
           "NonWorkdayFilingNote" => @doc.xpath("//NonWorkdayFilingNote").text,
           "AdditionalInstructionsNote" => @doc.xpath("//AdditionalInstructionsNote").text,
           "SendW2WhenFilingYNCode" => @doc.xpath("//SendW2WhenFilingYNCode").text,
@@ -913,7 +913,7 @@ require 'will_paginate/array'
     agency_tax_item_detail_json = []
     db_id = 'bgav6vyzb'
     quickbase = Quickbase::Connection.new(:apptoken => app_token, :dbid => db_id)
-    @column = "6.7.8.9.10.11.21.38.13.23.14.39.22.16.41.43.56.19.51.65.58.70"
+    @column = "6.7.8.9.10.11.21.38.13.23.14.39.40.22.16.41.43.56.19.51.65.58.70"
     @agency_tax_item_detail = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @agency_tax_item_detail.each do |data|
       data_json = {
@@ -929,6 +929,7 @@ require 'will_paginate/array'
         "additional_er_acct_num_format" => data["23"],
         "legal_holidays_observed_note" => data["14"],
         "reporting_codes_req_note" => data["39"],
+        "reporting_codes_req_doc" => data["40"],
         "customer_support_url" => data["22"],
         "agency_tax_item_website_url" => data["16"],
         "employer_guide_url" => data["70"],
