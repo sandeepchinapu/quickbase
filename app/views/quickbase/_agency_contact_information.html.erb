@@ -25,12 +25,17 @@
 </div>
 
 <div class="field">
+    Support Email :
+    <%= data["customer_support_email_id"] %>
+</div>
+
+<div class="field">
     Support URL :
     <%= data["customer_support_url"] %>
 </div>
 
 <div class="field">
-    Agency Website :
+    Agency Website URL :
     <%= data["agency_tax_item_website_url"] %>
 </div>
 
@@ -44,7 +49,7 @@
     <%= data["agency_detail_effective_date"] %>
 </div>
 
-<h4> History of Agency contact information </h4>
+<h3> History of Agency contact information </h3>
 <% data["detail_effective_date_audit"].each do |history_data| %>
 <div>
 <%= render partial: "agency_contact_information_history", locals: { history_data: history_data } %>
@@ -52,9 +57,15 @@
 </div>
 <% end %>
 
+<h4>Agency Holidays</h4>
 <div class="field">
     Agency Holidays :
     <%= data["legal_holidays_observed_note"] %>
+</div>
+
+<div class="field">
+    Holiday Effective Date :
+    <%= data["holiday_effective_date"] %>
 </div>
 
 <h3> History of Hoidays </h3>
@@ -82,6 +93,11 @@
 </div>
 
 <div class="field">
+    Additional Employer Account Number Detail :
+    <%= data["additional_er_acct_num_format"] %>
+</div>
+
+<div class="field">
     Account Number Effective Date :
     <%= data["account_number_effective_date"] %>
 </div>
@@ -97,6 +113,11 @@
 <div class="field">
     Reporting Code Requirements :
     <%= data["reporting_codes_req_note"] %>
+</div>
+
+<div class="field">
+    Reporting Code Doc :
+    <%= data["reporting_codes_req_doc"] %>
 </div>
 
 <div class="field">
