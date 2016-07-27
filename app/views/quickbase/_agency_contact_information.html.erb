@@ -1,7 +1,7 @@
 
 <div class="field">
     Agency Name :
-    <%= data["agency_code"] %>
+    <%= data["agency_tax_item_name"] %>
 </div>
 
 <div class="field">
@@ -51,7 +51,13 @@
 
 <h3> History of Agency contact information </h3>
 <% data["detail_effective_date_audit"].each do |history_data| %>
-<div>
+--------------------------------------------
+<div class="field">
+    Agency Name :
+    <%= data["agency_tax_item_name"] %>
+</div>
+
+<div>    
 <%= render partial: "agency_contact_information_history", locals: { history_data: history_data } %>
 
 </div>
@@ -120,6 +126,7 @@
     <%= data["reporting_codes_req_doc"] %>
 </div>
 
+<h4>Verification Tracking</h4>
 <div class="field">
     Last Verified Date :
     <%= data["last_verified_date"] %>

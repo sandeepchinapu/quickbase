@@ -1,10 +1,5 @@
---------------------------------------------
-<% history_data = history_data["DataChangeAudit"] %>
-<div class="field">
-    Agency Name :
-    <%= history_data["DataRecordName"]%>
-</div>
 
+<% history_data = history_data["DataChangeAudit"] %>
 <div class="field">
     Vendor Payable Name :
     <%= history_data["VendorPayableName"]%>
@@ -21,6 +16,11 @@
 </div>
 
 <div class="field">
+    Customer Support email :
+    <%= history_data["CustomerSupportEmail"] %>
+</div>
+
+<div class="field">
     Support URL :
     <%= history_data["CustomerSuportURL"] %>
 </div>
@@ -28,6 +28,16 @@
 <div class="field">
     Agency Website :
     <%= history_data["AgencyWebsiteURL"] %>
+</div>
+
+<div class="field">
+    Agency Website Name :
+    <%= history_data["AgencyWebsiteName"] %>
+</div>
+
+<div class="field">
+    Report Code Requirements :
+    <%= history_data["ReportCodeRequirements"] %>
 </div>
 
 <div class="field">
