@@ -1,14 +1,15 @@
 <% history_data = history_data["DataChangeAudit"] %>
-<div class="field">
-    Payment Frequency:
-    <%= history_data["TaxPaymentFreqCode"] %>
-    
-</div>
-<div id="whatever" class="view_tax_payment">
 
 <div class="field">
-    Payment Name :
+    Tax Payment Name :
     <%= history_data["TaxPaymentName"] %>
+</div>
+
+<!-- <div id="whatever" class="view_tax_payment"> -->
+
+<div class="field">
+    Frequency :
+    <%= history_data["TaxPaymentFreqCode"] %>
 </div>
 
 <div class="field">
@@ -42,7 +43,17 @@
 </div>
 
 <div class="field">
+    Additional Requirements :
+    <%= history_data["AdditionalReqNote"] %>
+</div>
+
+<div class="field">
+    Frequency Effective Date :
+    <%= history_data["PayFrequencyExpirationDate"] %>
+</div>
+
+<div class="field">
     Effective Date :
     <%= history_data["DataEffectiveDate"] %>
 </div>
-</div>
+<!-- </div> -->

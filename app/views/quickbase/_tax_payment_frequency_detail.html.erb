@@ -1,14 +1,29 @@
-
+<!-- 
 <div class="field">
     Payment Frequency:
     <%= data["tax_payment_frequency_code"] %>
     <a href="#" id="show_whatever">Show</a>
 </div>
-<div id="whatever" class="view_tax_payment">
+<div id="whatever" class="view_tax_payment"> -->
+
+<div class="field">
+    Payment Frequency:
+    <%= data["tax_payment_frequency_code"] %>
+</div>
 
 <div class="field">
     Payment Name :
     <%= data["agency_tax_payment_name"] %>
+</div>
+
+<div class="field">
+    Tax Payment Name :
+    <%= data["agency_tax_payment_name"] %>
+</div>
+
+<div class="field">
+    Frequency :
+    <%= data["tax_payment_frequency_code"] %>
 </div>
 
 <div class="field">
@@ -42,6 +57,11 @@
 </div>
 
 <div class="field">
+    Additional Requirements :
+    <%= data["additional_requirement_note"] %>
+</div>
+
+<div class="field">
     Effective Date :
     <%= data["pay_frequency_effective_date"] %>
 </div>
@@ -54,8 +74,9 @@
 </div>
 <% end %>
 
+<h4>Verification Tracking</h4>
 <div class="field">
     Last Verified Date :
     <%= data["last_verified_date"] %>
 </div>
-</div>
+<!-- </div> -->
