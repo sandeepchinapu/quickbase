@@ -1,9 +1,15 @@
 <% history_data = history_data["DataChangeAudit"] %>
 <div class="field">
+    Date Feature Cancelled in QuickBooks :
+    <%= history_data["QBFeatureCancelDate"] %>
+</div>
+
+<div class="field">
     QuickBooks DIY Recommendation :
     <%= history_data["QBDIYReqNote"] %>
 </div>
 
+<h4>Electronic Funds Transfer (EFT)</h4>
 <div class="field">
     "Are Payments allowed more often within a standard frequency?" :
     <%= history_data["EFTEligibilityNote"] %>
@@ -34,6 +40,7 @@
     <%= history_data["EFTSysImpactsNote"] %>
 </div>
 
+<h4>Paper Check</h4>
 <div class="field">
     "Are Payments allowed more often within a standard frequency?" :
     <%= history_data["ChkEligibilityNote"] %>

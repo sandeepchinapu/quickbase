@@ -1,8 +1,14 @@
 <div class="field">
+    Date Feature Cancelled in QuickBooks :
+    <%= data["qb_feature_cancelled_date"] %>
+</div>
+
+<div class="field">
     QuickBooks DIY Recommendation :
     <%= data["qb_diy_requirements_note"] %>
 </div>
 
+<h4>Electronic Funds Transfer (EFT)</h4>
 <div class="field">
     "Are Payments allowed more often within a standard frequency?" :
     <%= data["eft_eligibility_note"] %>
@@ -33,6 +39,7 @@
     <%= data["eft_known_sys_impacts_note"] %>
 </div>
 
+<h4>Paper Check</h4>
 <div class="field">
     "Are Payments allowed more often within a standard frequency?" :
     <%= data["check_eligibility_note"] %>

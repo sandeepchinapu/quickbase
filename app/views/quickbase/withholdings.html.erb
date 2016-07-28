@@ -12,7 +12,7 @@
 <h3>Agency contact information</h3>
 <% @data = @final_json[@state]["agency_tax_item_detail"] %>
 <% @data.each do |data| %>
-<% if data["tax_item_code"] == "WH/UI" %>
+<% if data["tax_item_code"] == "WH/UI" || data["tax_item_code"] == "WH" %>
 <%= render partial: "agency_contact_information", locals: { data: data } %>
 <% end %>
 <% end %>
@@ -27,7 +27,7 @@
 <h3>Agency Tax Payment Details</h3>
 <% @data = @final_json[@state]["agency_tax_payment_detail"] %>
 <% @data.each do |data| %>
-<% if data["tax_item_code"] == "WH/SDI" %>
+<% if data["tax_item_code"] == "WH/SDI" || data["tax_item_code"] == "WH" %>
 <%= render partial: "agency_tax_payment_detail", locals: { data: data } %>
 
 <% end %>
@@ -36,7 +36,7 @@
 <h3>Tax Payment Frequency Detail</h3>
 <% @data = @final_json[@state]["tax_payment_frequency"] %>
 <% @data.each do |data| %>
-<% if data["tax_item_code"] == "WH/SDI" %>
+<% if data["tax_item_code"] == "WH/SDI" || data["tax_item_code"] == "WH" %>
 <%= render partial: "tax_payment_frequency_detail", locals: { data: data } %>
 <% end %>
 <% end %>
@@ -44,24 +44,27 @@
 <h3>Electronic Mandate Requirement</h3>
 <% @data = @final_json[@state]["electroinc_mandate_requirement"] %>
 <% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH" %>
 <%= render partial: "electronic_mandate_requirement", locals: { data: data } %>
 
+<% end %>
 <% end %>
 
 <h3>Early Tax Payment Detail</h3>
 <% @data = @final_json[@state]["early_tax_payment_detail"] %>
 <% @data.each do |data| %>
+<% if data["tax_item_code"] == "WH" %>
 <%= render partial: "early_tax_payment", locals: { data: data } %>
 
 <% end %>
-
+<% end %>
 <!-- ****************-->
 <h2>Unemployment Tax</h2>
 
 <h3>Agency contact information</h3>
 <% @data = @final_json[@state]["agency_tax_item_detail"] %>
 <% @data.each do |data| %>
-<% if data["tax_item_code"] == "WH/UI" %>
+<% if data["tax_item_code"] == "WH/UI" || data["tax_item_code"] == "UI" %>
 <%= render partial: "agency_contact_information", locals: { data: data } %>
 <% end %>
 <% end %>
@@ -103,24 +106,28 @@
 <h3>Electronic Mandate Requirements</h3>
 <% @data = @final_json[@state]["electroinc_mandate_requirement"] %>
 <% @data.each do |data| %>
+<% if data["tax_item_code"] == "UI" || data["tax_item_code"] == "WH/UI/SDI" %>
 <%= render partial: "electronic_mandate_requirement", locals: { data: data } %>
 
-<% end %>s
+<% end %>
+<% end %>
+
 
 <h3>Early Tax Payment Detail</h3>
 <% @data = @final_json[@state]["early_tax_payment_detail"] %>
 <% @data.each do |data| %>
+<% if data["tax_item_code"] == "UI" %>
 <%= render partial: "early_tax_payment", locals: { data: data } %>
 
 <% end %>
-
+<% end %>
 <!-- ****************-->
 <h2>Other Taxes</h2>
 
 <h3>Agency contact information</h3>
 <% @data = @final_json[@state]["agency_tax_item_detail"] %>
 <% @data.each do |data| %>
-<% if data["tax_item_code"] == "SDI" %>
+<% if data["tax_item_code"] == "SDI" || data["tax_item_code"] == "WC" %>
 <%= render partial: "agency_contact_information", locals: { data: data } %>
 
 <% end %>
@@ -128,7 +135,7 @@
 <h3>Agency Tax Rate Detail</h3>
 <% @data = @final_json[@state]["agency_tax_rate"] %>
 <% @data.each do |data| %>
-<% if data["tax_item_code"] == "SDI" %>
+<% if data["tax_item_code"] == "SDI" || data["tax_item_code"] == "WC" %>
 <%= render partial: "agency_tax_rate", locals: { data: data } %>
 
 <% end %>
@@ -137,7 +144,7 @@
 <h3>Tax Payment Frequency Detail</h3>
 <% @data = @final_json[@state]["tax_payment_frequency"] %>
 <% @data.each do |data| %>
-<% if data["tax_item_code"] == "WH/SDI" %>
+<% if data["tax_item_code"] == "WH/SDI" || data["tax_item_code"] == "WC" %>
 <%= render partial: "tax_payment_frequency_detail", locals: { data: data } %>
 
 <% end %>
@@ -146,7 +153,7 @@
 <h3>Agency Tax Payment Details</h3>
 <% @data = @final_json[@state]["agency_tax_payment_detail"] %>
 <% @data.each do |data| %>
-<% if data["tax_item_code"] == "WH/SDI" %>
+<% if data["tax_item_code"] == "WH/SDI" || data["tax_item_code"] == "WC" %>
 <%= render partial: "agency_tax_payment_detail", locals: { data: data } %>
 
 <% end %>
@@ -205,17 +212,11 @@
 
 
 
-<script>
-$(function() {
-  $('a#show_whatever').click(function(event){
-    event.preventDefault();
-    $('div#whatever').toggle();
-  });
-});
-</script>
-
-
-
-
-
-
+// <script>
+// $(function() {
+//   $('a#show_whatever').click(function(event){
+//     event.preventDefault();
+//     $('div#whatever').toggle();
+//   });
+// });
+// </script>

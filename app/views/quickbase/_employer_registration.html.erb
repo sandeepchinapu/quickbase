@@ -20,15 +20,15 @@
 
 <div class="field">
     What is the link to the form for registration? :
-    <%= data["registration_process_url"] %>
-</div>
-
-<div class="field">
-    Are there any special registration rules? :
     <%= data["form_url"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
+    Are there any special registration rules? :
+    <%= data["registration_rules_note"] %>
+</div>
+
+<div class="field internal">
     How long does it take to get the registration processed? :
     <%= data["estimated_completion_duration"] %>
 </div>
@@ -38,7 +38,7 @@
     <%= data["general_registration_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Last Verified Date :
     <%= data["last_verified_date"] %>
 </div>

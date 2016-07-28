@@ -1034,7 +1034,7 @@ require 'will_paginate/array'
     employer_registration_json = []
     db_id = 'bhmqqyasx'
     quickbase = Quickbase::Connection.new(:apptoken => app_token, :dbid => db_id)
-    @column = "6.7.8.9.10.11.12.15.13.16.17"
+    @column = "6.7.8.9.10.11.12.14.15.13.16.17"
     @employer_registration = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @employer_registration.each do |data|
       data_json = {
@@ -1045,6 +1045,7 @@ require 'will_paginate/array'
         "fee_yn_code" => data["10"],
         "form_name" => data["11"],
         "form_url" => data["12"],
+        "registration_rules_note" => data["14"],
         "general_registration_note" => data["15"],
         "estimated_completion_duration" => data["13"],
         "requirements_effective_date" => convert_date(data["16"]),

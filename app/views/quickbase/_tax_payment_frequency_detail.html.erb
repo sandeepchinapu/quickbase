@@ -26,12 +26,12 @@
     <%= data["tax_payment_frequency_code"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Frequency Determination Method :
     <%= data["frequency_determination_code"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Frequency Determination Lookback :
     <%= data["freq_det_lookback_req_note"] %>
 </div>
@@ -46,7 +46,7 @@
     <%= data["tax_payment_due_date_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Holiday Allowance :
     <%= data["holiday_requirement_note"] %>
 </div>
@@ -56,7 +56,7 @@
     <%= data["threshold_requirement_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Additional Requirements :
     <%= data["additional_requirement_note"] %>
 </div>
@@ -68,14 +68,14 @@
 
 <h5> History of tax payment frequency details</h5>
 <% data["record_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="filed internal">
 <%= render partial: "tax_payment_frequency_detail_history", locals: { history_data: history_data } %>
 
 </div>
 <% end %>
 
 <h4>Verification Tracking</h4>
-<div class="field">
+<div class="field internal">
     Last Verified Date :
     <%= data["last_verified_date"] %>
 </div>
