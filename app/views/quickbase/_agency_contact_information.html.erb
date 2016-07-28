@@ -9,7 +9,7 @@
     <%= data["vendor_payable_name"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Tax Item Code :
     <%= data["tax_item_code"] %>
 </div>
@@ -30,7 +30,7 @@
 </div>
 
 <div class="field">
-    Support URL :
+    Support Website URL :
     <%= data["customer_support_url"] %>
 </div>
 
@@ -39,7 +39,7 @@
     <%= data["agency_tax_item_website_url"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Employer Guide URL :
     <%= data["employer_guide_url"] %>
 </div>
@@ -52,12 +52,12 @@
 <h3> History of Agency contact information </h3>
 <% data["detail_effective_date_audit"].each do |history_data| %>
 --------------------------------------------
-<div class="field">
+<div class="field internal">
     Agency Name :
     <%= data["agency_tax_item_name"] %>
 </div>
 
-<div>    
+<div class="field internal">    
 <%= render partial: "agency_contact_information_history", locals: { history_data: history_data } %>
 
 </div>
@@ -74,18 +74,13 @@
     <%= data["holiday_effective_date"] %>
 </div>
 
-<h3> History of Hoidays </h3>
+<h3> History of Holidays </h3>
 <% data["holiday_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal">
 <%= render partial: "agency_contact_information_holiday_history", locals: { history_data: history_data } %>
 
 </div>
 <% end %>
-
-<div class="field">
-    Holiday Effective Date :
-    <%= data["holiday_effective_date"] %>
-</div>
 
 <h3> Agency Account Number Formats</h3>
 <div class="field">
@@ -98,7 +93,7 @@
     <%= data["quickbooks_er_acct_num_format"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Additional Employer Account Number Detail :
     <%= data["additional_er_acct_num_format"] %>
 </div>
@@ -110,24 +105,25 @@
 
 <h3> History of Agency Account Number Formats</h3>
 <% data["acct_num_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal">
 <%= render partial: "agency_contact_information_accnumber_history", locals: { history_data: history_data } %>
 
 </div>
 <% end %>
 
-<div class="field">
+<h4>Report Code Information</h4>
+<div class="field internal">
     Reporting Code Requirements :
     <%= data["reporting_codes_req_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Reporting Code Doc :
     <%= data["reporting_codes_req_doc"] %>
 </div>
 
 <h4>Verification Tracking</h4>
-<div class="field">
+<div class="field internal">
     Last Verified Date :
     <%= data["last_verified_date"] %>
 </div>

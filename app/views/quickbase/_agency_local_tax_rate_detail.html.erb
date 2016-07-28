@@ -33,42 +33,42 @@
     <%= data["tax_rate_effective_date"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Allowance Amounts Detail :
     <%= data["allowance_amounts_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Tax Calculation Detail :
     <%= data["tax_calculation_note"] %>
 </div>
 
 <h4> History of Local tax rate detail</h4>
 <% data["record_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal">
 <%= render partial: "agency_local_tax_rate_detail_history", locals: { history_data: history_data } %>
 
 </div>
 <% end %>
 
 <h4> Service Requirements </h4>
-<div class="field">
+<div class="field internal">
     QuickBooks DIY Requirements :
     <%= data["qb_diy_requirements_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Assisted Requirements :
     <%= data["qb_assisted_requirements_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     IOP Requirements :
     <%= data["iop_requirements_note"] %>
 </div>
 
 <h4> Verification Tracking </h4>
-<div class="field">
+<div class="field internal">
     Last Verified Date :
     <%= data["last_verified_date"] %>
 </div>

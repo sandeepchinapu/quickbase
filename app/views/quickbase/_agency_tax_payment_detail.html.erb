@@ -3,39 +3,39 @@
     <%= data["agency_tax_payment_name"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Pay Zero ACH Credit :
     <%= data["pay_zero_ach_credit_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Pay Zero ACH Debit :
     <%= data["pay_zero_ach_debit_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Send paper Coupon/Return if Paying Electronically :
     <%= data["payment_coupon_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Rounding Requirement :
     <%= data["rounding_requirement_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Additional Requirements :
     <%= data["additional_requirements_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Effective Date :
     <%= data["payment_detail_effective_date"] %>
 </div>
 
 <h4> History of Agency Tax Payment Details </h4>
 <% data["record_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal">
 <%= render partial: "agency_tax_payment_detail_history", locals: { history_data: history_data } %>
 
 </div>

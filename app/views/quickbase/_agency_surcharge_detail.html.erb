@@ -38,31 +38,31 @@
     <%= data["surcharge_effective_date"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Surcharge Expiration Date :
     <%= data["surcharge_expiration_date"] %>
 </div>
 
 <h4> History of Agency surcharge detail</h4>
 <% data["record_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal">
 <%= render partial: "agency_surcharge_detail_history", locals: { history_data: history_data } %>
 
 </div>
 <% end %>
 
 <h4>Service Requirements</h4>
-<div class="field">
+<div class="field internal">
     Supported QuickBooks Surcharge :
     <%= data["quickbooks_surcharge_yn_code"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     QuickBooks DIY Requirements :
     <%= data["qb_diy_requirements_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Assisted Requirements :
     <%= data["qb_assisted_requirements_note"] %>
 </div>

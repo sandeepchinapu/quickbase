@@ -13,12 +13,12 @@
     <%= data["supplemental_rates_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Based on Federal Detail :
     <%= data["federal_wh_dependancy_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Calculation Rounded to the Nearest Dollar :
     <%= data["round_nearest_dollar_yn_code"] %>
 </div>
@@ -30,20 +30,30 @@
 
 <h5> History of Withholding Details</h5>
 <% data["wh_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal">
 <%= render partial: "agency_withholding_detail_history", locals: { history_data: history_data } %>
 </div>
 <% end %>
 
 <h3> W4 Requirements </h3>
-<div class="field">
+<div class="field internal">
     Filing Status Detail :
     <%= data["w4_filing_statuses_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Deducation/Allowance Detail :
     <%= data["w4_deductible_items_note"] %>
+</div>
+
+<div class="field internal">
+    Rate Requirement Detail :
+    <%= data["w4_rate_requirement_note"] %>
+</div>
+
+<div class="field internal">
+    Additional Requirements :
+    <%= data["w4_additional_req_note"] %>
 </div>
 
 <div class="field">
@@ -59,22 +69,29 @@
 
 <h5> History of W4 Requirements </h5>
 <% data["w4_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal">
 <%= render partial: "agency_withholding_detail_w4requirement_history", locals: { history_data: history_data } %>
 </div>
 <% end %>
 
-<div class="field">
+<h3> Service Requirements </h3>
+<div class="field internal">
     QuickBooks DIY Requirements :
     <%= data["qb_diy_requirements_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Assisted Requirements :
     <%= data["qb_assisted_requirements_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
+    IOP Requirements :
+    <%= data["iop_requirements_note"] %>
+</div>
+
+<h4>Verification Tracking</h4>
+<div class="field internal">
     Last Verified Date :
     <%= data["last_verified_date"] %>
 </div>

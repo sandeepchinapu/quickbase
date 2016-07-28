@@ -1,5 +1,5 @@
 
-<div class="field">
+<div class="field internal">
     Fixed Rate :
     <%= data["fixed_employer_rate"] %>
 </div>
@@ -24,12 +24,12 @@
     <%= data["new_employer_rate"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     New Construction Rate Details :
     <%= data["new_construction_er_rate_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Limit Calculation Frequency :
     <%= data["er_limit_freq_calculation_cd"] %>
 </div>
@@ -41,7 +41,7 @@
 
 <h4> History of Agency tax rate </h4>
 <% data["er_rate_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal"> 
 <%= render partial: "agency_tax_rate_history", locals: { history_data: history_data } %>
 
 </div>
@@ -60,7 +60,7 @@
 
 <h4> History of Employer Wage Base </h4>
 <% data["er_wb_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="filed internal">
 <%= render partial: "agency_tax_rate_er_wb_history", locals: { history_data: history_data } %>
 
 </div>
@@ -72,12 +72,12 @@
     <%= data["fixed_employee_rate"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Fixed Dollar Amount :
     <%= data["fixed_employee_amount"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Limit Calculation Frequency :
     <%= data["ee_limit_freq_calculation_cd"] %>
 </div>
@@ -89,7 +89,7 @@
 
 <h4> History of employee rates </h4>
 <% data["ee_rate_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="filed internal">
 <%= render partial: "agency_tax_rate_ee_rates_history", locals: { history_data: history_data } %>
 
 </div>
@@ -108,30 +108,30 @@
 
 <h4> History of employee Wage Base </h4>
 <% data["ee_wb_effective_date_audit"].each do |history_data| %>
-<div>
+<div class="field internal">
 <%= render partial: "agency_tax_rate_ee_wb_history", locals: { history_data: history_data } %>
 
 </div>
 <% end %>
 
 <h5>Service Requirements</h5>
-<div class="field">
+<div class="field internal">
     QuickBooks DIY Requirements :
     <%= data["qb_diy_requirements_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     Assisted Requirements :
     <%= data["qb_assisted_requirements_note"] %>
 </div>
 
-<div class="field">
+<div class="field internal">
     IOP Requirements :
     <%= data["iop_requirements_note"] %>
 </div>
 
 <h5>Verification Tracking</h5>
-<div class="field">
+<div class="field internal">
     Last Verified Date :
     <%= data["last_verified_date"] %>
 </div>

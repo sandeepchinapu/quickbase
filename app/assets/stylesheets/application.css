@@ -14,3 +14,7 @@
  *= require_self
  */
 div.view_tax_payment { display: none; }
+div.internal {
+	font-style: italic;
+	color: blue;
+}
