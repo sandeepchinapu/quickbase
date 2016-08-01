@@ -122,7 +122,6 @@ require 'will_paginate/array'
 
   def ImportAgencyFormDetailHistory(data)
     array_j = []
-    # puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -156,7 +155,6 @@ require 'will_paginate/array'
           "FormDetailExpirationDate" => @doc.xpath("//FormDetailExpirationDate").text
         }
       }
-      # puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -164,7 +162,6 @@ require 'will_paginate/array'
 
   def ImportAgencyFormQBMethodHistory(data)
     array_j = []
-    # puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -185,7 +182,6 @@ require 'will_paginate/array'
           "PaymentMethodNote" => @doc.xpath("//PaymentMethodNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -228,7 +224,6 @@ require 'will_paginate/array'
 
   def ImportAgencyWithholdingHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -250,7 +245,6 @@ require 'will_paginate/array'
           "IOPReqNote" => @doc.xpath("//IOPReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -258,7 +252,6 @@ require 'will_paginate/array'
 
   def ImportAgencyWithholdingW4History(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -277,7 +270,6 @@ require 'will_paginate/array'
           "FedW4AllowedYNCode" => @doc.xpath("//FedW4AllowedYNCode").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -311,7 +303,6 @@ require 'will_paginate/array'
 
   def ImportAgencyTaxPaymentHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -331,7 +322,6 @@ require 'will_paginate/array'
           "AdditionalReqNote" => @doc.xpath("//AdditionalReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -368,7 +358,6 @@ require 'will_paginate/array'
 
   def ImportTaxPaymentFrequencyHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -392,7 +381,6 @@ require 'will_paginate/array'
           "PayFrequencyExpirationDate" => @doc.xpath("//PayFrequencyExpirationDate").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -424,7 +412,6 @@ require 'will_paginate/array'
 
   def ImportElectronicMandateHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -442,7 +429,6 @@ require 'will_paginate/array'
           "SvcProviderPaymentReqNote" => @doc.xpath("//SvcProviderPaymentReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -510,7 +496,6 @@ require 'will_paginate/array'
           "IOPReqNote" => @doc.xpath("//IOPReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -518,7 +503,6 @@ require 'will_paginate/array'
 
   def ImportAgencyTaxRateEmployeeWageBaseHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -536,7 +520,6 @@ require 'will_paginate/array'
           "IOPReqNote" => @doc.xpath("//IOPReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -544,7 +527,6 @@ require 'will_paginate/array'
 
   def ImportAgencyTaxRateEmployerRateHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -568,7 +550,6 @@ require 'will_paginate/array'
           "IOPReqNote" => @doc.xpath("//IOPReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -576,7 +557,6 @@ require 'will_paginate/array'
 
   def ImportAgencyTaxRateEmployerWageBaseHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -596,7 +576,6 @@ require 'will_paginate/array'
           "IOPReqNote" => @doc.xpath("//IOPReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -636,7 +615,6 @@ require 'will_paginate/array'
 
   def ImportAgencySurchargeHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -662,7 +640,6 @@ require 'will_paginate/array'
           "IOPReqNote" => @doc.xpath("//IOPReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -692,7 +669,6 @@ require 'will_paginate/array'
 
   def ImportPayStubHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -709,7 +685,6 @@ require 'will_paginate/array'
           "PaperDeliveryReqNote" => @doc.xpath("//PaperDeliveryReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -747,7 +722,6 @@ require 'will_paginate/array'
 
   def ImportAgencyLocalTaxRateHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -771,7 +745,6 @@ require 'will_paginate/array'
           "IOPReqNote" => @doc.xpath("//IOPReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -808,7 +781,6 @@ require 'will_paginate/array'
 
   def ImportElectronicFormReqsHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -832,7 +804,6 @@ require 'will_paginate/array'
           "EFormReqExpirationDate" => @doc.xpath("//EFormReqExpirationDate").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -874,7 +845,6 @@ require 'will_paginate/array'
 
   def ImportEarlyTaxPaymentHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -902,7 +872,6 @@ require 'will_paginate/array'
           "QBDIYReqNote" => @doc.xpath("//QBDIYReqNote").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -950,7 +919,6 @@ require 'will_paginate/array'
     array_j = []
     # k = quickbase.api.do_query(:query => "{'6'.CT.'CA'}", :clist => "51")
     # data = k[1]["51"]
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') ## Agency Contact Information
     length = split_data.count - 1
     for i in 1..length
@@ -972,7 +940,7 @@ require 'will_paginate/array'
             "ReportCodeRequirements" => @doc.xpath("//ReportCodeRequirements").text
           }
         }
-        puts "@@@@@", cjson
+
         array_j << cjson
       end
       array_j
@@ -980,7 +948,6 @@ require 'will_paginate/array'
 
   def ImportAgencyTaxItemAccountNumberHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -998,7 +965,6 @@ require 'will_paginate/array'
           "AddtnlERAcctNumFormat" => @doc.xpath("//CustomerSupportEmail").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j
@@ -1006,7 +972,6 @@ require 'will_paginate/array'
 
   def ImportAgencyTaxItemHolidayHistory(data)
     array_j = []
-    puts "@@@@@@@@@", data.inspect
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
@@ -1021,7 +986,6 @@ require 'will_paginate/array'
           "HolidayEffectiveDate" => @doc.xpath("//DataEffectiveDate").text
         }
       }
-      puts "@@@@@", cjson
       array_j << cjson
     end
     array_j

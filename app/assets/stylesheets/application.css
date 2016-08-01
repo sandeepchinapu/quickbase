@@ -18,3 +18,18 @@ div.internal {
 	font-style: italic;
 	color: blue;
 }
+
+.table_border { border: 1px solid black; }
+
+table, th, td {
+   border: 1px solid black;
+}
+
+.test{
+	/*width: 30% !important;*/
+    text-align: center;
+}
+
+.my-background{
+	background-color:#e5e2e8;
+}
