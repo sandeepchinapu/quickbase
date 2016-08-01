@@ -1,0 +1,139 @@
+<div>
+   <tr class="test">
+    <td  style='width:40%;'><%= data["agency_tax_form_id"] %></td>
+    <td><%= data["tax_item_code"] %></td>
+    <td><%= data["Form_name"] %></td>
+   </tr>
+</div>
+<div style="display:none;"> 
+<dl>
+  <dt>Subform of :</dt>
+  <dd> <%= data["associated_form_id"] %></dd>
+  <dt>Form Name :</dt>
+  <dd><%= data["Form_name"] %></dd>
+</dl>
+
+<div class="field internal">
+    Description :
+    <%= data["Description"] %>
+</div>
+
+<div class="field">
+    Filing Frequency :
+    <%= data["filing_frequency_note"] %>
+</div>
+
+<div class="field">
+    Filing Due Dates :
+    <%= data["filing_due_date_req_note"] %>
+</div>
+
+<div class="field internal">
+    Holiday and Weekend Rules :
+    <%= data["non_workday_filing_note"] %>
+</div>
+
+<div class="field internal">
+    Additional Instructions :
+    <%= data["Additional_instrictions_note"] %>
+</div>
+
+<div class="field internal">
+    Annual Reconciliation :
+    <%= data["annual_reconciliation_yn_code"] %>
+</div>
+
+<div class="field">
+    W2's sent with Annual Filing? :
+    <%= data["send_w2s_when_filing_yn_code"] %>
+</div>
+
+<div class="field">
+    File Zero Wages Rule :
+    <%= data["file_zero_wage_yn_code"] %>
+</div>
+
+<div class="field">
+    File Zero Liability Rules :
+    <%= data["file_zero_liability_yn_code"] %>
+</div>
+
+<div class="field internal">
+    Filing Acknowledgement :
+    <%= data["filing_acknowledge_date_code"] %>
+</div>
+
+<div class="field internal">
+    Filing Acknowledgement Note :
+    <%= data["filing_acknowledge_date_note"] %>
+</div>
+
+<div class="field internal">
+    Payment Acknowledgement :
+    <%= data["payment_acknowledge_date_code"] %>
+</div>
+
+<div class="field internal">
+    Payment Acknowledgement Note :
+    <%= data["payment_acknowledge_date_note"] %>
+</div>
+
+<div class="field internal">
+    Effective Date :
+    <%= data["form_detail_effective_date"] %>
+</div>
+
+<h5> History of Agency form detail </h5>
+<% data["detail_effective_date_audit"].each do |history_data| %>
+<div class="field internal">
+<%= render partial: "agency_form_detail_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<h5>Send Methods Available in QuickBooks</h5>
+<div class="field internal">
+    Form is in QuickBooks :
+    <%= data["quickbooks_form_yn_code"] %>
+</div>
+
+<div class="field internal">
+    QuickBooks DIY Form ID :
+    <%= data["quickbooks_diy_form_id"] %>
+</div>
+
+<div class="field internal">
+    Payment can go with Form :
+    <%= data["payment_with_form_yn_code"] %>
+</div>
+
+<div class="field">
+    Filing Methods-DIY :
+    <%= data["filing_method_note"] %>
+</div>
+
+<div class="field">
+    Payment Methods-DIY :
+    <%= data["payment_method_note"] %>
+</div>
+
+<div class="field">
+    QB Effective Date :
+    <%= data["qb_methods_effective_date"] %>
+</div>
+
+<h5> History of Send Methods Available in QuickBooks </h5>
+<% data["qb_methods_effective_date_audit"].each do |history_data| %>
+<div class="field internal">
+<%= render partial: "agency_form_detail_send_methods_history", locals: { history_data: history_data } %>
+
+</div>
+<% end %>
+
+<h5>Verification Tracking</h5>
+<div class="field internal">
+    Last Verified Date :
+    <%= data["last_verified_date"] %>
+</div>
+</div>
+----------
