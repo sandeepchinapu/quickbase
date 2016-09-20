@@ -1,8 +1,9 @@
 class QuickbaseController < ApplicationController
-require 'will_paginate/array'
+# require 'will_paginate/array'
   before_action :get_data
 
   def withholdings
+    @state_json = @final_json[@state.to_sym]
   end
 
   def index
@@ -12,12 +13,13 @@ require 'will_paginate/array'
   end
 
   def get_data
-    state = params["state"] || "CA"
+    # state = params[state] || 'CA'
+    state = 'UT'
     @state = state
-    Quickbase::Connection.username = 'Qbotfxeng@intuit.com'
-    Quickbase::Connection.password = 'Intuit123'
-    Quickbase::Connection.org = 'intuitcorp'
-    app_token = 'cf4hhpsdd9wcqr74t549cc4yp3e'
+    Quickbase::Connection.username = ENV['QUICKBASE_USERNAME']
+    Quickbase::Connection.password = ENV['QUICKBASE_PASSWORD']
+    Quickbase::Connection.org = ENV['QUICKBASE_ORG']
+    app_token = ENV['QUICKBASE_APPTOKEN']
 
     agency_form_detail_json = agency_form_detail(app_token, state)
     agency_tax_item_detail_json = agency_tax_item_detail(app_token, state)
@@ -34,25 +36,23 @@ require 'will_paginate/array'
     employer_registration_json = employer_registration(app_token, state)
 
     @final_json = {
-      state => {
-        "agency_form_detail" => agency_form_detail_json,
-        "agency_tax_item_detail" => agency_tax_item_detail_json,
-        "agency_withholding_tax_details" => agency_withholding_tax_details_json,
-        "agency_tax_payment_detail" => agency_tax_payment_detail_json,
-        "tax_payment_frequency" => tax_payment_frequency_json,
-        "electroinc_mandate_requirement" => electroinc_mandate_requirement_json,
-        "agency_tax_rate" => agency_tax_rate_json,
-        "agency_surcharge" => agency_surcharge_json,
-        "pay_stub_requirement" => pay_stub_requirement_json,
-        "agency_local_tax_rate_detail" => agency_local_tax_rate_detail_json,
-        "electronic_form_requirement" => electronic_form_requirement_json,
-        "early_tax_payment_detail" => early_tax_payment_detail_json,
-        "employer_registration" => employer_registration_json
+      "#{state}": {
+        agency_form_detail: agency_form_detail_json,
+        agency_tax_item_detail: agency_tax_item_detail_json,
+        agency_withholding_tax_details: agency_withholding_tax_details_json,
+        agency_tax_payment_detail: agency_tax_payment_detail_json,
+        tax_payment_frequency: tax_payment_frequency_json,
+        electroinc_mandate_requirement: electroinc_mandate_requirement_json,
+        agency_tax_rate: agency_tax_rate_json,
+        agency_surcharge: agency_surcharge_json,
+        pay_stub_requirement: pay_stub_requirement_json,
+        agency_local_tax_rate_detail: agency_local_tax_rate_detail_json,
+        electronic_form_requirement: electronic_form_requirement_json,
+        early_tax_payment_detail: early_tax_payment_detail_json,
+        employer_registration: employer_registration_json
       }
     }
-
-    @final_json 
-
+    @final_json
   end
 
   # def history_data()
@@ -87,49 +87,46 @@ require 'will_paginate/array'
     agency_form_detail_json = []
     @agency_form_detail.each do |data|
       data_json = {
-        "tax_item_code" => data["27"],
-        "agency_tax_form_id" => data["7"],
-        "Form_name" => data["8"],
-        "associated_form_id" => data["34"],
-        "Description" => data["9"],
-        "filing_frequency_note" => data["32"],
-        "filing_due_date_req_note" => data["11"],
-        "non_workday_filing_note" => data["12"],
-        "Additional_instrictions_note" => data["13"],
-        "file_zero_wage_yn_code" => data["17"],
-        "file_zero_liability_yn_code" => data["18"],
-        "annual_reconciliation_yn_code" => data["54"],
-        "send_w2s_when_filing_yn_code" => data["33"],
-        "filing_acknowledge_date_code" => data["20"],
-        "filing_acknowledge_date_note" => data["21"],
-        "payment_acknowledge_date_code" => data["22"],
-        "payment_acknowledge_date_note" => data["23"],
-        "quickbooks_form_yn_code" => data["19"],
-        "quickbooks_diy_form_id" => data["53"],
-        "payment_with_form_yn_code" => data["16"],
-        "filing_method_note" => data["14"],
-        "payment_method_note" => data["15"],
-        "form_detail_effective_date" => convert_date(data["35"]),
-        "qb_methods_effective_date" => convert_date(data["36"]),
-        "last_verified_date" => convert_date(data["24"]),
-        "detail_effective_date_audit" => ImportAgencyFormDetailHistory(data["41"]),
-        "qb_methods_effective_date_audit" => ImportAgencyFormQBMethodHistory(data["48"])
+        tax_item_code: data['27'],
+        agency_tax_form_id: data['7'],
+        form_name: data['8'],
+        associated_form_id: data['34'],
+        description: data['9'],
+        filing_frequency_note: data['32'],
+        filing_due_date_req_note: data['11'],
+        non_workday_filing_note: data['12'],
+        additional_instrictions_note: data['13'],
+        file_zero_wage_yn_code: data['17'],
+        file_zero_liability_yn_code: data['18'],
+        annual_reconciliation_yn_code: data['54'],
+        send_w2s_when_filing_yn_code: data['33'],
+        filing_acknowledge_date_code: data['20'],
+        filing_acknowledge_date_note: data['21'],
+        payment_acknowledge_date_code: data['22'],
+        payment_acknowledge_date_note: data['23'],
+        quickbooks_form_yn_code: data['19'],
+        quickbooks_diy_form_id: data['53'],
+        payment_with_form_yn_code: data['16'],
+        filing_method_note: data['14'],
+        payment_method_note: data['15'],
+        form_detail_effective_date: data['35'],
+        qb_methods_effective_date: data['36'],
+        last_verified_date: data['24'],
+        detail_effective_date_audit: import_agency_form_detail_history(data['41']),
+        qb_methods_effective_date_audit: import_agency_form_qb_method_history(data['48'])
       }
       agency_form_detail_json << data_json
     end
     agency_form_detail_json
   end
 
-  def ImportAgencyFormDetailHistory(data)
+  def import_agency_form_detail_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
     for i in 1..length
       xml_d = split_data[i]
       @doc = Nokogiri::XML xml_d 
-      puts "$$$$$$$$$$$$$"
-      puts @doc.xpath("//FilingDueDateReqNot").text
-      puts "%%%%%%%%%%%%"
       cjson = { 
         "DataChangeAudit" => {
           "DataRecordName" => @doc.xpath("//DataRecordName").text,
@@ -160,7 +157,7 @@ require 'will_paginate/array'
     array_j
   end
 
-  def ImportAgencyFormQBMethodHistory(data)
+  def import_agency_form_qb_method_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -192,37 +189,37 @@ require 'will_paginate/array'
     tax_details_json = []
     db_id = 'bggi9ejn5'
     quickbase = Quickbase::Connection.new(:apptoken => app_token, :dbid => db_id)
-    @column = "6.7.27.8.9.20.11.17.18.19.21.22.23.24.25.30.37.14.32.39"
+    @column = "6.7.27.8.9.20.11.17.18.19.21.22.23.24.25.28.13.14.32.39"
     @agency_withholding_tax_details =  quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @agency_withholding_tax_details.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["7"],
-        "calculate_tax_yn_code" => data["27"],
-        "allowance_amounts_note" => data["8"],
-        "supplemental_rates_note" => data["9"],
-        "federal_wh_dependancy_note" => data["20"],
-        "round_nearest_dollar_yn_code" => data["11"],
-        "qb_diy_requirements_note" => data["17"],
-        "qb_assisted_requirements_note" => data["18"],
-        "iop_requirements_note" => data["19"],
-        "w4_filing_statuses_note" => data["21"],
-        "w4_deductible_items_note" => data["22"],
-        "w4_rate_requirement_note" => data["23"],
-        "w4_additional_req_note" => data["24"],
-        "federal_w4_allowed_yn_code" => data["25"],
-        "wh_detail_effective_date" => convert_date(data["30"]),
-        "w4_effective_date" => convert_date(data["37"]),
-        "last_verified_date" => convert_date(data["14"]),
-        "wh_effective_date_audit" => ImportAgencyWithholdingHistory(data["32"]),
-        "w4_effective_date_audit" => ImportAgencyWithholdingW4History(data["39"])
+        agency_code: data["6"],
+        tax_item_code: data["7"],
+        calculate_tax_yn_code: data["27"],
+        allowance_amounts_note: data["8"],
+        supplemental_rates_note: data["9"],
+        federal_wh_dependancy_note: data["20"],
+        round_nearest_dollar_yn_code: data["11"],
+        qb_diy_requirements_note: data["17"],
+        qb_assisted_requirements_note: data["18"],
+        iop_requirements_note: data["19"],
+        w4_filing_statuses_note: data["21"],
+        w4_deductible_items_note: data["22"],
+        w4_rate_requirement_note: data["23"],
+        w4_additional_req_note: data["24"],
+        federal_w4_allowed_yn_code: data["25"],
+        wh_detail_effective_date: data["13"],
+        w4_effective_date: data["28"],
+        last_verified_date: data["14"],
+        wh_effective_date_audit: import_agency_withholding_history(data["32"]),
+        w4_effective_date_audit: import_agency_withholding_w4_history(data["39"])
       }
       tax_details_json << data_json
     end
     tax_details_json
   end
 
-  def ImportAgencyWithholdingHistory(data)
+  def import_agency_withholding_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -250,7 +247,7 @@ require 'will_paginate/array'
     array_j
   end
 
-  def ImportAgencyWithholdingW4History(data)
+  def import_agency_withholding_w4_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -284,24 +281,24 @@ require 'will_paginate/array'
     @agency_tax_payment_detail =  quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @agency_tax_payment_detail.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["8"],
-        "agency_tax_payment_name" => data["7"],
-        "pay_zero_ach_credit_note" => data["9"],
-        "pay_zero_ach_debit_note" => data["10"],
-        "payment_coupon_note" => data["11"],
-        "rounding_requirement_note" => data["12"],
-        "additional_requirements_note" => data["13"],
-        "last_verified_date" => convert_date(data["14"]),
-        "payment_detail_effective_date" => convert_date(data["18"]),
-        "record_effective_date_audit" => ImportAgencyTaxPaymentHistory(data["21"])
+        agency_code: data["6"],
+        tax_item_code: data["8"],
+        agency_tax_payment_name: data["7"],
+        pay_zero_ach_credit_note: data["9"],
+        pay_zero_ach_debit_note: data["10"],
+        payment_coupon_note: data["11"],
+        rounding_requirement_note: data["12"],
+        additional_requirements_note: data["13"],
+        last_verified_date: data["14"],
+        payment_detail_effective_date: data["18"],
+        record_effective_date_audit: import_agency_tax_payment_history(data["21"])
       }
       tax_payment_detail_json << data_json
     end
     tax_payment_detail_json
   end
 
-  def ImportAgencyTaxPaymentHistory(data)
+  def import_agency_tax_payment_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -336,27 +333,27 @@ require 'will_paginate/array'
     @agency_tax_frequency =  quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @agency_tax_frequency.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["19"],
-        "agency_tax_payment_name" => data["7"],
-        "tax_payment_frequency_code" => data["20"],
-        "frequency_determination_code" => data["9"],
-        "freq_det_lookback_req_note" => data["10"],
-        "liability_grouping_req_note" => data["11"],
-        "tax_payment_due_date_note" => data["12"],
-        "holiday_requirement_note" => data["13"],
-        "threshold_requirement_note" => data["14"],
-        "additional_requirement_note" => data["15"],
-        "last_verified_date" => convert_date(data["16"]),
-        "pay_frequency_effective_date" => convert_date(data["22"]),
-        "record_effective_date_audit" => ImportTaxPaymentFrequencyHistory(data["25"])
+        agency_code: data["6"],
+        tax_item_code: data["19"],
+        agency_tax_payment_name: data["7"],
+        tax_payment_frequency_code: data["20"],
+        frequency_determination_code: data["9"],
+        freq_det_lookback_req_note: data["10"],
+        liability_grouping_req_note: data["11"],
+        tax_payment_due_date_note: data["12"],
+        holiday_requirement_note: data["13"],
+        threshold_requirement_note: data["14"],
+        additional_requirement_note: data["15"],
+        last_verified_date: data["16"],
+        pay_frequency_effective_date: data["22"],
+        record_effective_date_audit: import_tax_payment_frequency_history(data["25"])
       }
       tax_payment_frequency_json << data_json
     end
     tax_payment_frequency_json
   end 
 
-  def ImportTaxPaymentFrequencyHistory(data)
+  def import_tax_payment_frequency_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -395,22 +392,22 @@ require 'will_paginate/array'
     @electroinc_mandate_requirement =  quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @electroinc_mandate_requirement.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["7"],
-        "employer_filing_req_note" => data["8"],
-        "employer_payment_req_note" => data["9"],
-        "svc_provider_filing_req_note" => data["10"],
-        "svc_provider_payment_req_note" => data["11"],
-        "mandate_effective_date" => convert_date(data["15"]),
-        "last_verified_date" => convert_date(data["12"]),
-        "record_effective_date_audit" => ImportElectronicMandateHistory(data["18"])
+        agency_code: data["6"],
+        tax_item_code: data["7"],
+        employer_filing_req_note: data["8"],
+        employer_payment_req_note: data["9"],
+        svc_provider_filing_req_note: data["10"],
+        svc_provider_payment_req_note: data["11"],
+        mandate_effective_date: data["15"],
+        last_verified_date: data["12"],
+        record_effective_date_audit: import_electronic_mandate_history(data["18"])
       }
       electroinc_mandate_requirement_json << data_json
     end
     electroinc_mandate_requirement_json
   end
 
-  def ImportElectronicMandateHistory(data)
+  def import_electronic_mandate_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -439,43 +436,43 @@ require 'will_paginate/array'
     agency_tax_rate_json = []
     db_id = 'bggisvzur'
     quickbase = Quickbase::Connection.new(:apptoken => app_token, :dbid => db_id)
-    @column = "18.19.11.27.28.29.31.32.6.7.8.9.10.12.14.15.16.24.25.50.17.21.38.59.52.45"
+    @column = "18.19.11.27.28.29.31.32.6.7.8.9.10.12.14.15.16.24.25.13.17.21.38.59.52.45"
     @agency_tax_rate =  quickbase.api.do_query(:query => "{'18'.CT.#{state}}", :clist => @column)
     @agency_tax_rate.each do |data|
       data_json = {
-        "agency_code" => data["18"],
-        "tax_item_code" => data["19"],
-        "new_construction_er_rate_note" => data["11"],
-        "qb_diy_requirements_note" => data["27"],
-        "qb_assisted_requirements_note" => data["28"],
-        "iop_requirements_note" => data["29"],
-        "er_limit_freq_calculation_cd" => data["31"],
-        "ee_limit_freq_calculation_cd" => data["32"],
-        "fixed_employer_amount" => data["6"],
-        "fixed_employer_rate" => data["7"],
-        "minimum_employer_rate" => data["8"],
-        "maximum_employer_rate" => data["9"],
-        "new_employer_rate" => data["10"],
-        "employer_wage_base_amount" => data["12"],
-        "fixed_employee_amount" => data["14"],
-        "fixed_employee_rate" => data["15"],
-        "employee_wage_base_amount" => data["16"],
-        "er_wage_base_effective_date" => convert_date(data["24"]),
-        "ee_wage_base_effective_date" => convert_date(data["25"]),
-        "er_rate_effective_date" => convert_date(data["50"]),
-        "ee_rate_effective_date" => convert_date(data["17"]),
-        "last_verified_date" => convert_date(data["21"]),
-        "ee_rate_effective_date_audit" => ImportAgencyTaxRateEmployeeRateHistory(data["38"]),
-        "ee_wb_effective_date_audit" => ImportAgencyTaxRateEmployeeWageBaseHistory(data["59"]),
-        "er_rate_effective_date_audit" => ImportAgencyTaxRateEmployerRateHistory(data["52"]),
-        "er_wb_effective_date_audit" => ImportAgencyTaxRateEmployerWageBaseHistory(data["45"])
+        agency_code: data["18"],
+        tax_item_code: data["19"],
+        new_construction_er_rate_note: data["11"],
+        qb_diy_requirements_note: data["27"],
+        qb_assisted_requirements_note: data["28"],
+        iop_requirements_note: data["29"],
+        er_limit_freq_calculation_cd: data["31"],
+        ee_limit_freq_calculation_cd: data["32"],
+        fixed_employer_amount: data["6"],
+        fixed_employer_rate: data["7"],
+        minimum_employer_rate: data["8"],
+        maximum_employer_rate: data["9"],
+        new_employer_rate: data["10"],
+        employer_wage_base_amount: data["12"],
+        fixed_employee_amount: data["14"],
+        fixed_employee_rate: data["15"],
+        employee_wage_base_amount: data["16"],
+        er_wage_base_effective_date: data["24"],
+        ee_wage_base_effective_date: data["25"],
+        er_rate_effective_date: data["13"],
+        ee_rate_effective_date: data["17"],
+        last_verified_date: data["21"],
+        ee_rate_effective_date_audit: import_agency_tax_rate_employee_rate_history(data["38"]),
+        ee_wb_effective_date_audit: import_agency_tax_rate_employee_wagebase_history(data["59"]),
+        er_rate_effective_date_audit: import_agency_tax_rate_employer_rate_history(data["52"]),
+        er_wb_effective_date_audit: import_agency_tax_rate_employer_wagebase_history(data["45"])
       }
       agency_tax_rate_json << data_json
     end
     agency_tax_rate_json
   end
 
-  def ImportAgencyTaxRateEmployeeRateHistory(data)
+  def import_agency_tax_rate_employee_rate_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -501,7 +498,7 @@ require 'will_paginate/array'
     array_j
   end
 
-  def ImportAgencyTaxRateEmployeeWageBaseHistory(data)
+  def import_agency_tax_rate_employee_wagebase_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -525,7 +522,7 @@ require 'will_paginate/array'
     array_j
   end
 
-  def ImportAgencyTaxRateEmployerRateHistory(data)
+  def import_agency_tax_rate_employer_rate_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -555,7 +552,7 @@ require 'will_paginate/array'
     array_j
   end
 
-  def ImportAgencyTaxRateEmployerWageBaseHistory(data)
+  def import_agency_tax_rate_employer_wagebase_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -590,30 +587,30 @@ require 'will_paginate/array'
     @agency_surcharge = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @agency_surcharge.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["7"],
-        "surcharge_code" => data["8"],
-        "surcharge_name" => data["9"],
-        "quickbooks_surcharge_yn_code" => data["21"],
-        "creditable_to_futa_yn_code" => data["12"],
-        "qb_diy_requirements_note" => data["22"],
-        "qb_assisted_requirements_note" => data["23"],
-        "iop_requirements_note" => data["24"],
-        "fixed_employer_rate" => data["13"],
-        "minimum_employer_rate" => data["14"],
-        "maximum_employer_rate" => data["15"],
-        "employer_wage_base_amount" => data["16"],
-        "surcharge_effective_date" => convert_date(data["10"]),
-        "surcharge_expiration_date" => convert_date(data["11"]),
-        "last_verified_date" => convert_date(data["18"]),
-        "record_effective_date_audit" => ImportAgencySurchargeHistory(data["28"])
+        agency_code: data["6"],
+        tax_item_code: data["7"],
+        surcharge_code: data["8"],
+        surcharge_name: data["9"],
+        quickbooks_surcharge_yn_code: data["21"],
+        creditable_to_futa_yn_code: data["12"],
+        qb_diy_requirements_note: data["22"],
+        qb_assisted_requirements_note: data["23"],
+        iop_requirements_note: data["24"],
+        fixed_employer_rate: data["13"],
+        minimum_employer_rate: data["14"],
+        maximum_employer_rate: data["15"],
+        employer_wage_base_amount: data["16"],
+        surcharge_effective_date: data["10"],
+        surcharge_expiration_date: data["11"],
+        last_verified_date: data["18"],
+        record_effective_date_audit: import_agency_surcharge_history(data["28"])
       }
       agency_surcharge_json << data_json
     end
     agency_surcharge_json
   end
 
-  def ImportAgencySurchargeHistory(data)
+  def import_agency_surcharge_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -654,20 +651,20 @@ require 'will_paginate/array'
     @pay_stub_requirement = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @pay_stub_requirement.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "general_delivery_req_note" => data["7"],
-        "electronic_delivery_req_note" => data["8"],
-        "paper_deliver_req_note" => data["9"],
-        "pay_stub_effective_date" => convert_date(data["15"]),
-        "last_verified_date" => convert_date(data["10"]),
-        "record_effective_date_audit" => ImportPayStubHistory(data["18"])
+        agency_code: data["6"],
+        general_delivery_req_note: data["7"],
+        electronic_delivery_req_note: data["8"],
+        paper_deliver_req_note: data["9"],
+        pay_stub_effective_date: data["15"],
+        last_verified_date: data["10"],
+        record_effective_date_audit: import_pay_stub_history(data["18"])
       }
       pay_stub_requirement_json << data_json
     end
     pay_stub_requirement_json
   end
 
-  def ImportPayStubHistory(data)
+  def import_pay_stub_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -699,28 +696,28 @@ require 'will_paginate/array'
     @agency_local_tax_rate_detail = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @agency_local_tax_rate_detail.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["7"],
-        "local_tax_name" => data["8"],
-        "local_tax_purpose_note" => data["9"],
-        "responsible_party_code" => data["10"],
-        "tax_rate_note" => data["11"],
-        "additional_requirements_note" => data["15"],
-        "allowance_amounts_note" => data["13"],
-        "tax_calculation_note" => data["14"],
-        "qb_diy_requirements_note" => data["26"],
-        "qb_assisted_requirements_note" => data["27"],
-        "iop_requirements_note" => data["28"],
-        "tax_rate_effective_date" => convert_date(data["12"]),
-        "last_verified_date" => convert_date(data["16"]),
-        "record_effective_date_audit" => ImportAgencyLocalTaxRateHistory(data["21"])
+        agency_code: data["6"],
+        tax_item_code: data["7"],
+        local_tax_name: data["8"],
+        local_tax_purpose_note: data["9"],
+        responsible_party_code: data["10"],
+        tax_rate_note: data["11"],
+        additional_requirements_note: data["15"],
+        allowance_amounts_note: data["13"],
+        tax_calculation_note: data["14"],
+        qb_diy_requirements_note: data["26"],
+        qb_assisted_requirements_note: data["27"],
+        iop_requirements_note: data["28"],
+        tax_rate_effective_date: data["12"],
+        last_verified_date: data["16"],
+        record_effective_date_audit: import_agency_local_tax_rate_history(data["21"])
       }
       agency_local_tax_rate_detail_json << data_json
     end
     agency_local_tax_rate_detail_json
   end
 
-  def ImportAgencyLocalTaxRateHistory(data)
+  def import_agency_local_tax_rate_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -759,27 +756,27 @@ require 'will_paginate/array'
     @electronic_form_requirement = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @electronic_form_requirement.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["19"],
-        "agency_tax_form_id" => data["20"],
-        "filing_enrollment_note" => data["8"],
-        "payment_enrollment_note" => data["9"],
-        "login_requirement_note" => data["10"],
-        "additional_login_detail_note" => data["11"],
-        "bank_acct_change_note" => data["12"],
-        "penalty_interest_req_note" => data["13"],
-        "penalty_interest_howto_note" => data["14"],
-        "alternative_submission_note" => data["15"],
-        "e_form_req_effective_date" => convert_date(data["21"]),
-        "last_verified_date" => convert_date(data["16"]),
-        "record_effective_date_audit" => ImportElectronicFormReqsHistory(data["24"])
+        agency_code: data["6"],
+        tax_item_code: data["19"],
+        agency_tax_form_id: data["20"],
+        filing_enrollment_note: data["8"],
+        payment_enrollment_note: data["9"],
+        login_requirement_note: data["10"],
+        additional_login_detail_note: data["11"],
+        bank_acct_change_note: data["12"],
+        penalty_interest_req_note: data["13"],
+        penalty_interest_howto_note: data["14"],
+        alternative_submission_note: data["15"],
+        e_form_req_effective_date: data["21"],
+        last_verified_date: data["16"],
+        record_effective_date_audit: import_electronic_form_reqs_history(data["24"])
       }
       electronic_form_requirement_json << data_json
     end
     electronic_form_requirement_json
   end
 
-  def ImportElectronicFormReqsHistory(data)
+  def import_electronic_form_reqs_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -818,32 +815,32 @@ require 'will_paginate/array'
     @early_tax_payment_detail = quickbase.api.do_query(:query => "{'21'.CT.#{state}}", :clist => @column)
     @early_tax_payment_detail.each do |data|
       data_json = {
-        "agency_code" => data["21"],
-        "tax_item_code" => data["22"],
-        "eft_eligibility_note" => data["6"],
-        "eft_process_note" => data["7"],
-        "eft_communication_note" => data["8"],
-        "eft_form_note" => data["9"],
-        "eft_timing_note" => data["10"],
-        "eft_known_sys_impacts_note" => data["11"],
-        "check_eligibility_note" => data["12"],
-        "check_process_note" => data["13"],
-        "check_communication_note" => data["14"],
-        "check_form_note" => data["15"],
-        "check_timing_note" => data["16"],
-        "check_known_sys_impacts_note" => data["17"],
-        "qb_diy_requirements_note" => data["24"],
-        "qb_feature_cancelled_date" => convert_date(data["23"]),
-        "early_pay_effective_date" => convert_date(data["25"]),
-        "last_verified_date" => convert_date(data["18"]),
-        "record_effective_date_audit" => ImportEarlyTaxPaymentHistory(data["28"])
+        agency_code: data["21"],
+        tax_item_code: data["22"],
+        eft_eligibility_note: data["6"],
+        eft_process_note: data["7"],
+        eft_communication_note: data["8"],
+        eft_form_note: data["9"],
+        eft_timing_note: data["10"],
+        eft_known_sys_impacts_note: data["11"],
+        check_eligibility_note: data["12"],
+        check_process_note: data["13"],
+        check_communication_note: data["14"],
+        check_form_note: data["15"],
+        check_timing_note: data["16"],
+        check_known_sys_impacts_note: data["17"],
+        qb_diy_requirements_note: data["24"],
+        qb_feature_cancelled_date: data["23"],
+        early_pay_effective_date: data["25"],
+        last_verified_date: data["18"],
+        record_effective_date_audit: import_early_tax_payment_history(data["28"])
       }
       early_tax_payment_detail_json << data_json
     end
     early_tax_payment_detail_json
   end
 
-  def ImportEarlyTaxPaymentHistory(data)
+  def import_early_tax_payment_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -882,40 +879,40 @@ require 'will_paginate/array'
     agency_tax_item_detail_json = []
     db_id = 'bgav6vyzb'
     quickbase = Quickbase::Connection.new(:apptoken => app_token, :dbid => db_id)
-    @column = "6.7.8.9.10.11.21.38.13.23.14.39.40.22.16.41.43.56.19.51.65.58.70"
+    @column = "6.7.8.9.10.11.21.38.13.23.14.39.40.22.16.41.43.42.19.51.65.58.70"
     @agency_tax_item_detail = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @agency_tax_item_detail.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["7"],
-        "agency_tax_item_name" => data["8"],
-        "vendor_payable_name" => data["9"],
-        "office_full_mailing_address" => data["10"],
-        "office_phone_number_detail" => data["11"],
-        "customer_support_email_id" => data["21"],
-        "account_number_name" => data["38"],
-        "quickbooks_er_acct_num_format" => data["13"],
-        "additional_er_acct_num_format" => data["23"],
-        "legal_holidays_observed_note" => data["14"],
-        "reporting_codes_req_note" => data["39"],
-        "reporting_codes_req_doc" => data["40"],
-        "customer_support_url" => data["22"],
-        "agency_tax_item_website_url" => data["16"],
-        "employer_guide_url" => data["70"],
-        "agency_detail_effective_date" => convert_date(data["41"]),
-        "account_number_effective_date" => convert_date(data["43"]),
-        "holiday_effective_date" => convert_date(data["56"]),
-        "last_verified_date" => convert_date(data["19"]),
-        "detail_effective_date_audit" => ImportAgencyTaxItemDetailHistory(data["51"]),
-        "acct_num_effective_date_audit" => ImportAgencyTaxItemAccountNumberHistory(data["65"]),
-        "holiday_effective_date_audit" => ImportAgencyTaxItemHolidayHistory(data["58"])
+        agency_code: data["6"],
+        tax_item_code: data["7"],
+        agency_tax_item_name: data["8"],
+        vendor_payable_name: data["9"],
+        office_full_mailing_address: data["10"],
+        office_phone_number_detail: data["11"],
+        customer_support_email_id: data["21"],
+        account_number_name: data["38"],
+        quickbooks_er_acct_num_format: data["13"],
+        additional_er_acct_num_format: data["23"],
+        legal_holidays_observed_note: data["14"],
+        reporting_codes_req_note: data["39"],
+        reporting_codes_req_doc: data["40"],
+        customer_support_url: data["22"],
+        agency_tax_item_website_url: data["16"],
+        employer_guide_url: data["70"],
+        agency_detail_effective_date: data["41"],
+        account_number_effective_date: data["43"],
+        holiday_effective_date: data["42"],
+        last_verified_date: data["19"],
+        detail_effective_date_audit: import_agency_tax_item_detail_history(data["51"]),
+        acct_num_effective_date_audit: import_agency_tax_item_account_number_history(data["65"]),
+        holiday_effective_date_audit: import_agency_tax_item_holiday_history(data["58"])
       }
       agency_tax_item_detail_json << data_json
     end
     agency_tax_item_detail_json
   end
 
-  def ImportAgencyTaxItemDetailHistory(data)
+  def import_agency_tax_item_detail_history(data)
     array_j = []
     # k = quickbase.api.do_query(:query => "{'6'.CT.'CA'}", :clist => "51")
     # data = k[1]["51"]
@@ -940,13 +937,12 @@ require 'will_paginate/array'
             "ReportCodeRequirements" => @doc.xpath("//ReportCodeRequirements").text
           }
         }
-
         array_j << cjson
       end
       array_j
   end
 
-  def ImportAgencyTaxItemAccountNumberHistory(data)
+  def import_agency_tax_item_account_number_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -970,7 +966,7 @@ require 'will_paginate/array'
     array_j
   end
 
-  def ImportAgencyTaxItemHolidayHistory(data)
+  def import_agency_tax_item_holiday_history(data)
     array_j = []
     split_data = data.split('--------------') 
     length = split_data.count - 1
@@ -1002,18 +998,18 @@ require 'will_paginate/array'
     @employer_registration = quickbase.api.do_query(:query => "{'6'.CT.#{state}}", :clist => @column)
     @employer_registration.each do |data|
       data_json = {
-        "agency_code" => data["6"],
-        "tax_item_code" => data["7"],
-        "preferred_method_code" => data["8"],
-        "registration_process_url" => data["9"],
-        "fee_yn_code" => data["10"],
-        "form_name" => data["11"],
-        "form_url" => data["12"],
-        "registration_rules_note" => data["14"],
-        "general_registration_note" => data["15"],
-        "estimated_completion_duration" => data["13"],
-        "requirements_effective_date" => convert_date(data["16"]),
-        "last_verified_date" => convert_date(data["17"])
+        agency_code: data["6"],
+        tax_item_code: data["7"],
+        preferred_method_code: data["8"],
+        registration_process_url: data["9"],
+        fee_yn_code: data["10"],
+        form_name: data["11"],
+        form_url: data["12"],
+        registration_rules_note: data["14"],
+        general_registration_note: data["15"],
+        estimated_completion_duration: data["13"],
+        requirements_effective_date: data["16"],
+        last_verified_date: data["17"]
       }
       employer_registration_json << data_json
     end
