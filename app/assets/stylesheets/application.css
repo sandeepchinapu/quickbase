@@ -33,3 +33,44 @@ table, th, td {
 .my-background{
 	background-color:#e5e2e8;
 }
+
+.internal{
+	font-style: italic;
+	color: blue;
+}
+
+.view_alignment{
+	margin-left: 20%;
+}
+
+dl {
+    /*margin-bottom:40px;*/
+}
+ 
+dl dt {
+    float:left; 
+    margin-right:10px; 
+    padding:3px;  
+    width:300px; 
+}
+ 
+dl dd {
+    margin:2px 0; 
+    padding:5px 0;
+    margin-bottom:50px;
+}
+
+
+
+/*dl dt {
+
+	float:left;
+	margin-right:10px;
+	clear:both;
+	width:100px;
+}
+dl dd {
+	float:left;
+	margin:2px 0;
+}
+*/
