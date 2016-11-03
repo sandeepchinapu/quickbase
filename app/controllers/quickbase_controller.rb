@@ -14,10 +14,10 @@ require 'will_paginate/array'
   def get_data
     state = params["state"] || "CA"
     @state = state
-    Quickbase::Connection.username = 'Qbotfxeng@intuit.com'
-    Quickbase::Connection.password = 'Intuit123'
-    Quickbase::Connection.org = 'intuitcorp'
-    app_token = 'cf4hhpsdd9wcqr74t549cc4yp3e'
+    Quickbase::Connection.username = ''
+    Quickbase::Connection.password = ''
+    Quickbase::Connection.org = ''
+    app_token = ''
 
     agency_form_detail_json = agency_form_detail(app_token, state)
     agency_tax_item_detail_json = agency_tax_item_detail(app_token, state)
